@@ -32,7 +32,7 @@ http://inhu.net
                         _self.setEditorContent()
                         # 监听编辑器内容改变事件
                         _self.editor.addListener "contentChange", ->
-                            ctrl.$setViewValue editor.getContent()
+                            ctrl.$setViewValue _self.editor.getContent()
                             $S.$apply() unless $S.$$phase
                             return
                     return
