@@ -38,11 +38,11 @@ http://inhu.net
                 }
                 this.editor = new UE.ui.Editor();
                 this.editor.render(element[0]);
-                this.editor.ready(function() {
+                return this.editor.ready(function() {
                   _self.editorReady = true;
                   _self.setEditorContent();
-                  return _self.editor.addListener("contentChange", function() {
-                    ctrl.$setViewValue(editor.getContent());
+                  _self.editor.addListener("contentChange", function() {
+                    ctrl.$setViewValue(_self.editor.getContent());
                     if (!$S.$$phase) {
                       $S.$apply();
                     }
@@ -63,11 +63,8 @@ http://inhu.net
                 var _self;
                 _self = this;
                 ctrl.$render = function() {
-                  var _ref;
                   _self.modelContent = (ctrl.$isEmpty(ctrl.$viewValue) ? "" : ctrl.$viewValue);
-                  if ((_ref = _self.editor) != null) {
-                    _ref.setEditorContent();
-                  }
+                  _self.setEditorContent();
                 };
               };
 
@@ -83,4 +80,4 @@ http://inhu.net
 
 }).call(this);
 
-//# sourceMappingURL=ueditor.js.map
+//# sourceMappingURL=angular-ueditor.js.map

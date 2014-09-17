@@ -6,7 +6,7 @@
     "'Dio' <'zqjimlove@gmail.com'>"
   ],
   "description": "angualr port for Baidu ueditor",
-  "main": "dist/ueditor.js",
+  "main": "dist/angular-ueditor.min.js",
   "keywords": [
     "angular",
     "ueditor"
