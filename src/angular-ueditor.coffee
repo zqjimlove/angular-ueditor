@@ -5,10 +5,11 @@ http://inhu.net
 "use strict"
 (->
     NGUeditor = angular.module "ng.ueditor",[]
-    NGUeditor.directive "ueditorss",[
+    NGUeditor.directive "ueditor",[
      ->
         restrict: "C"
         require: "ngModel"
+        scope:false
         link:($S, element, attr, ctrl) ->
             class _NGUeditor
                 constructor :->
@@ -25,7 +26,8 @@ http://inhu.net
                     console.error "Please import the local resources of ueditor!"
                     return
                     # 新建UEditor，可根据API文档进行配置
-                  @editor = new UE.ui.Editor()
+                  _UEConfig = if attr.config and $S[attr.config] then $S[attr.config] else {}
+                  @editor = new UE.ui.Editor(_UEConfig)
                   @editor.render element[0]
                   @editor.ready ->
                     _self.editorReady = true

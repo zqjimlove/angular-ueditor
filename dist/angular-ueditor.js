@@ -9,11 +9,12 @@ http://inhu.net
   (function() {
     var NGUeditor;
     NGUeditor = angular.module("ng.ueditor", []);
-    NGUeditor.directive("ueditorss", [
+    NGUeditor.directive("ueditor", [
       function() {
         return {
           restrict: "C",
           require: "ngModel",
+          scope: false,
           link: function($S, element, attr, ctrl) {
             var _NGUeditor;
             _NGUeditor = (function() {
@@ -30,13 +31,14 @@ http://inhu.net
                */
 
               _NGUeditor.prototype.initEditor = function() {
-                var _self;
+                var _UEConfig, _self;
                 _self = this;
                 if (typeof UE === 'undefined') {
                   console.error("Please import the local resources of ueditor!");
                   return;
                 }
-                this.editor = new UE.ui.Editor();
+                _UEConfig = attr.config && $S[attr.config] ? $S[attr.config] : {};
+                this.editor = new UE.ui.Editor(_UEConfig);
                 this.editor.render(element[0]);
                 return this.editor.ready(function() {
                   _self.editorReady = true;

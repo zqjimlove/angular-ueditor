@@ -10,7 +10,17 @@
     "grunt-contrib-copy": "^0.5.0",
     "grunt-contrib-uglify": "^0.4.0",
     "load-grunt-tasks": "^0.4.0",
-    "time-grunt": "^0.3.1"
+    "time-grunt": "^0.3.1",
+    "karma": "~0.10",
+    "protractor": "^1.1.1",
+    "http-server": "^0.6.1",
+    "karma-junit-reporter": "^0.2.2"
+  },
+  "scripts":{
+    "test": "karma start karma.conf.js",
+    "start": "http-server -a localhost -p 8000 -c-1",
+    "update-webdriver": "webdriver-manager update",
+    "protractor": "protractor e2e-tests/protractor.conf.js"
   },
   "engines": {
     "node": ">=0.10.0"
