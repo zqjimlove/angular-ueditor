@@ -6,14 +6,9 @@ module.exports = function(config){
     files : [
       'http://cdn.staticfile.org/angular.js/1.2.18/angular.min.js',
       'http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-mocks.js',
-      'ueditor/ueditor.config.js',
-      'ueditor/ueditor.all.js',
-      'ueditor/lang/**/*.js',
-      'ueditor/themes/**/*.css',
-      'ueditor/third-party/codemirror/*.*',
-      'ueditor/third-party/highcharts/highcharts.js',
-      'ueditor/third-party/*.js',
-      'ueditor/third-party/zeroclipboard/*.js',
+      'http://ueditor.baidu.com/ueditor/ueditor.config.js',
+      'http://ueditor.baidu.com/ueditor/ueditor.all.js',
+      'http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.js',
       'dist/angular-ueditor.js',
       'tests/**/*.js'
     ],

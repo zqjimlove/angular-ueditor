@@ -27,16 +27,17 @@ http://inhu.net
                     return
                     # 新建UEditor，可根据API文档进行配置
                   _UEConfig = if attr.config and $S[attr.config] then $S[attr.config] else {}
-                  @editor = new UE.ui.Editor(_UEConfig)
-                  @editor.render element[0]
+                  _editorId = if attr.id  then attr.id else "_editor#{Date.now()}"
+                  element[0].id = _editorId
+                  @editor = new UE.getEditor(_editorId,_UEConfig)
                   @editor.ready ->
                     _self.editorReady = true
-                    _self.setEditorContent()
                     # 监听编辑器内容改变事件
                     _self.editor.addListener "contentChange", ->
                       ctrl.$setViewValue _self.editor.getContent()
                       $S.$apply() unless $S.$$phase
                       return
+                    _self.setEditorContent()
                     return
                 setEditorContent : (content =  @modelContent) ->
                   @editor.setContent content  if @editor and @editorReady

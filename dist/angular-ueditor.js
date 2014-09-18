@@ -31,24 +31,25 @@ http://inhu.net
                */
 
               _NGUeditor.prototype.initEditor = function() {
-                var _UEConfig, _self;
+                var _UEConfig, _editorId, _self;
                 _self = this;
                 if (typeof UE === 'undefined') {
                   console.error("Please import the local resources of ueditor!");
                   return;
                 }
                 _UEConfig = attr.config && $S[attr.config] ? $S[attr.config] : {};
-                this.editor = new UE.ui.Editor(_UEConfig);
-                this.editor.render(element[0]);
+                _editorId = attr.id ? attr.id : "_editor" + (Date.now());
+                element[0].id = _editorId;
+                this.editor = new UE.getEditor(_editorId, _UEConfig);
                 return this.editor.ready(function() {
                   _self.editorReady = true;
-                  _self.setEditorContent();
                   _self.editor.addListener("contentChange", function() {
                     ctrl.$setViewValue(_self.editor.getContent());
                     if (!$S.$$phase) {
                       $S.$apply();
                     }
                   });
+                  _self.setEditorContent();
                 });
               };
 
