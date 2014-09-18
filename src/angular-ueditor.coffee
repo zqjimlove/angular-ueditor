@@ -9,7 +9,9 @@ http://inhu.net
      ->
         restrict: "C"
         require: "ngModel"
-        scope:false
+        scope:
+          config:"="
+          ready:"="
         link:($S, element, attr, ctrl) ->
             class _NGUeditor
                 constructor :->
@@ -26,7 +28,7 @@ http://inhu.net
                     console.error "Please import the local resources of ueditor!"
                     return
                     # 新建UEditor，可根据API文档进行配置
-                  _UEConfig = if attr.config and $S[attr.config] then $S[attr.config] else {}
+                  _UEConfig = if $S.config then $S.config else {}
                   _editorId = if attr.id  then attr.id else "_editor#{Date.now()}"
                   element[0].id = _editorId
                   @editor = new UE.getEditor(_editorId,_UEConfig)
@@ -38,6 +40,7 @@ http://inhu.net
                       $S.$apply() unless $S.$$phase
                       return
                     _self.setEditorContent()
+                    $S.ready?(_self.editor)
                     return
                 setEditorContent : (content =  @modelContent) ->
                   @editor.setContent content  if @editor and @editorReady

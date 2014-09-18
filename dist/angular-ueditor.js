@@ -14,7 +14,10 @@ http://inhu.net
         return {
           restrict: "C",
           require: "ngModel",
-          scope: false,
+          scope: {
+            config: "=",
+            ready: "="
+          },
           link: function($S, element, attr, ctrl) {
             var _NGUeditor;
             _NGUeditor = (function() {
@@ -37,7 +40,7 @@ http://inhu.net
                   console.error("Please import the local resources of ueditor!");
                   return;
                 }
-                _UEConfig = attr.config && $S[attr.config] ? $S[attr.config] : {};
+                _UEConfig = $S.config ? $S.config : {};
                 _editorId = attr.id ? attr.id : "_editor" + (Date.now());
                 element[0].id = _editorId;
                 this.editor = new UE.getEditor(_editorId, _UEConfig);
@@ -50,6 +53,9 @@ http://inhu.net
                     }
                   });
                   _self.setEditorContent();
+                  if (typeof $S.ready === "function") {
+                    $S.ready(_self.editor);
+                  }
                 });
               };
 

@@ -116,4 +116,28 @@ describe('angular-ueditor', function() {
             return flag;
         }, "editor should be small", 1000);
     }));
+
+    it('should be ready callback', inject(function($timeout, $rootScope, $document, $compile) {
+        var flag;
+        runs(function() {
+            elm.remove();
+            scope.ready = function(editor){
+                expect(editor).toBeDefined();
+                flag = true
+            }
+            elm = angular.element(
+                '<div class="ueditor" ready="ready" id="' + 'editor' + i + '" ng-model="test"></div>');
+
+            $document.find('body').append(elm);
+
+            $compile(elm)(scope);
+
+            controller = elm.controller('ngModel');
+
+            scope.$digest();
+        });
+        waitsFor(function() {
+            return flag;
+        }, "editor should be small", 1000);
+    }));
 });
