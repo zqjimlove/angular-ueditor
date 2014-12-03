@@ -19,7 +19,8 @@ http://inhu.net
             ready: "="
           },
           link: function($S, element, attr, ctrl) {
-            var _NGUeditor;
+            var _NGUeditor, _updateByRender;
+            _updateByRender = false;
             _NGUeditor = (function() {
               function _NGUeditor() {
                 this.bindRender();
@@ -48,9 +49,12 @@ http://inhu.net
                   _self.editorReady = true;
                   _self.editor.addListener("contentChange", function() {
                     ctrl.$setViewValue(_self.editor.getContent());
-                    if (!$S.$$phase) {
-                      $S.$apply();
+                    if (!_updateByRender) {
+                      if (!$S.$$phase) {
+                        $S.$apply();
+                      }
                     }
+                    _updateByRender = false;
                   });
                   _self.setEditorContent();
                   if (typeof $S.ready === "function") {
@@ -73,6 +77,7 @@ http://inhu.net
                 _self = this;
                 ctrl.$render = function() {
                   _self.modelContent = (ctrl.$isEmpty(ctrl.$viewValue) ? "" : ctrl.$viewValue);
+                  _updateByRender = true;
                   _self.setEditorContent();
                 };
               };

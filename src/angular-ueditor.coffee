@@ -13,6 +13,7 @@ http://inhu.net
           config:"="
           ready:"="
         link:($S, element, attr, ctrl) ->
+            _updateByRender = false
             class _NGUeditor
                 constructor :->
                   @bindRender()
@@ -37,7 +38,8 @@ http://inhu.net
                     # 监听编辑器内容改变事件
                     _self.editor.addListener "contentChange", ->
                       ctrl.$setViewValue _self.editor.getContent()
-                      $S.$apply() unless $S.$$phase
+                      $S.$apply() unless $S.$$phase unless _updateByRender
+                      _updateByRender = false
                       return
                     _self.setEditorContent()
                     $S.ready?(_self.editor)
@@ -49,6 +51,7 @@ http://inhu.net
                   _self = @
                   ctrl.$render = ->
                     _self.modelContent = (if ctrl.$isEmpty(ctrl.$viewValue) then "" else ctrl.$viewValue)
+                    _updateByRender = true
                     _self.setEditorContent()
                     return
                   return
