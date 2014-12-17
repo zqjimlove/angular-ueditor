@@ -41,7 +41,6 @@ http://inhu.net
                 $S.$apply() unless $S.$$phase unless _updateByRender
                 _updateByRender = false
                 return
-              debugger;
               _self.setEditorContent() if _self.modelContent.length > 0
               $S.ready?(_self.editor)
               return
