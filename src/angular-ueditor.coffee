@@ -43,6 +43,9 @@ http://inhu.net
                 return
               _self.setEditorContent() if _self.modelContent.length > 0
               $S.ready?(_self.editor)
+              $S.$on "$destroy", ->
+                _self.editor?.destory()
+                return
               return
           setEditorContent: (content = @modelContent) ->
             @editor.setContent content  if @editor and @editorReady
