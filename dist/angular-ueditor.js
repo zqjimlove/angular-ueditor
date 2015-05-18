@@ -64,7 +64,7 @@ http://inhu.net
                   }
                   $S.$on("$destroy", function() {
                     var _ref;
-                    if ((_ref = _self.editor) != null) {
+                    if ((_ref = _self.editor && _self.editor.destory) != null) {
                       _ref.destory();
                     }
                   });
