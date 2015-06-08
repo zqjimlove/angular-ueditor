@@ -62,6 +62,12 @@ http://inhu.net
                   if (typeof $S.ready === "function") {
                     $S.ready(_self.editor);
                   }
+                  $S.$on("$destroy", function() {
+                    var _ref;
+                    if ((_ref = _self.editor && _self.editor.destory) != null) {
+                      _ref.destory();
+                    }
+                  });
                 });
               };
 
