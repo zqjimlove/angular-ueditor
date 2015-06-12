@@ -1,4 +1,3 @@
-
 'use strict';
 
 
@@ -67,6 +66,41 @@ module.exports = function(grunt) {
                     ext: '.js'
                 }]
             }
+        },
+        watch: {
+            coffee: {
+                files: ['<%= config.src %>/*.coffee'],
+                tasks: ['coffee']
+            },
+            livereload: {
+                options: {
+                    livereload: '<%= connect.options.livereload %>'
+                },
+                files: [
+                    'sample/**/*.html',
+                    '.tmp/**/*.js'
+                ]
+            }
+        },
+        connect: {
+            options: {
+                port: 9000,
+                // Change this to '0.0.0.0' to access the server from outside.
+                hostname: '0.0.0.0',
+                livereload: 35729
+            },
+            livereload: {
+                options: {
+                    open: false,
+                    middleware: function(connect) {
+                        return [
+                            connect.static('sample'),
+                            connect.static('.tmp'),
+                            connect.static('src')
+                        ];
+                    }
+                }
+            }
         }
     });
 
@@ -78,6 +112,13 @@ module.exports = function(grunt) {
         'copy:dist',
         'uglify:dist'
     ]);
+
+    grunt.registerTask('serve', 'DEPRECATED TASK. Use the "serve" task instead', function(target) {
+        grunt.task.run([
+            'connect:livereload',
+            'watch'
+        ]);
+    });
 
     grunt.registerTask('default', [
         'build'

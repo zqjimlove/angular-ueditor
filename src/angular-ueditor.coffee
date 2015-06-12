@@ -32,7 +32,8 @@ http://inhu.net
             _UEConfig = if $S.config then $S.config else {}
             _editorId = if attr.id  then attr.id else "_editor#{Date.now()}"
             element[0].id = _editorId
-            @editor = new UE.getEditor(_editorId, _UEConfig)
+            @editor = new UE.ui.Editor(_UEConfig)
+            @editor.render _editorId
             @editor.ready ->
               _self.editorReady = true
               # 监听编辑器内容改变事件
@@ -41,10 +42,10 @@ http://inhu.net
                 $S.$apply() unless $S.$$phase unless _updateByRender
                 _updateByRender = false
                 return
-              _self.setEditorContent() if _self.modelContent.length > 0
+              _self.setEditorContent() if _self.modelContent and _self.modelContent.length > 0
               $S.ready?(_self.editor)
               $S.$on "$destroy", ->
-                (_self.editor && _self.editor.destory) ?.destory()
+                UE.delEditor _editorId if not attr.id && UE.delEditor
                 return
               return
           setEditorContent: (content = @modelContent) ->

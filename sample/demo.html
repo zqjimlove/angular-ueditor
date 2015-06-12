@@ -4,7 +4,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>angular-ueditor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1"></head>
-  <link rel="stylesheet" href="http://cdn.staticfile.org/foundation/5.3.0/css/foundation.css"/>
+  <link rel="stylesheet" href="http://cdn.staticfile.org/foundation/5.4.7/css/foundation.css"/>
   <style>
   table.edui-default{
     margin-bottom: 0;
@@ -12,62 +12,55 @@
   }
   </style>
 <body>
+  <nav class="top-bar" data-topbar="" role="navigation" data-options="sticky_on: large">
+    <ul class="title-area">
+      <!-- Title Area -->
+      <li class="name">
+        <h1>
+          <a href="https://github.com/zqjimlove/angular-ueditor">angular-ueditor</a>
+        </h1>
+      </li>
+    </ul>
 
-  <div class="row" ng-controller="CTRL">
-    <div class="columns small-12">
-      <h1>angular-ueditor 例子</h1>
-      <div class="panel">
-        <h2>双向绑定</h2>
-        <div style="margin-bottom:1.25rem" class="ueditor" ng-model="content1" ></div>
+    <section class="top-bar-section">
 
-        <textarea ng-model="content1"></textarea>
-      </div>
+      <!-- Right Nav Section -->
+      <ul class="right">
+        <li>
+          <a href="#/">路由1</a>
+        </li>
+        <li>
+          <a href="#/index2">路由2</a>
+        </li>
+      </ul>
 
-      <div class="panel">
-        <h2>带配置项</h2>
-        <div class="ueditor" ng-model="content1" config="_simpleConfig"></div>
-      </div>
+    </section>
+  </nav>
 
-      <div class="panel">
-        <form name="v">
-          <h2>表单非空验证</h2>
-          <div class="ueditor" name="content"  ng-model="content2" config="_simpleConfig" required></div>
-        </form>
+  <!-- <div id="test"></div> -->
+  
 
-        <div style="background:#FFF;color:red">
-          <tt>content = {{content2}}</tt>
-          <br>
-          <tt>v.content.$valid = {{v.content.$valid}}</tt>
-          <br>
-          <tt>v.content.$error = {{v.content.$error}}</tt>
-          <br>
-          <tt>v.$valid = {{v.$valid}}</tt>
-          <br>
-          <tt>v.$error.required = {{!!v.$error.required}}</tt>
-          <br></div>
-      </div>
-    </div>
-  </div>
+  <div ng-view></div>
 
   <script type="text/javascript" src="http://ueditor.baidu.com/ueditor/ueditor.config.js"></script>
   <script type="text/javascript" src="http://ueditor.baidu.com/ueditor/ueditor.all.js"></script>
-  <script type="text/javascript" src="http://cdn.staticfile.org/angular.js/1.2.18/angular.min.js"></script>
-  <script type="text/javascript" src="../dist/angular-ueditor.js"></script>
-  <script type="text/javascript">
-    angular.module('UeditorApp', ["ng.ueditor"
-    ]).controller("CTRL",["$scope",function($S){
-      $S._simpleConfig = {
-            //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
-            toolbars:[['FullScreen', 'Source', 'Undo', 'Redo','Bold','test']],
-            //focus时自动清空初始化时的内容
-            autoClearinitialContent:true,
-            //关闭字数统计
-            wordCount:false,
-            //关闭elementPath
-            elementPathEnabled:false
-      }
-      $S.content1 = 'Hello Ueditor';
-    }]);
-</script>
+  <script type="text/javascript" src="http://cdn.staticfile.org/angular.js/1.3.0-beta.13/angular.min.js"></script>
+  <script type="text/javascript" src="http://cdn.staticfile.org/angular.js/1.3.0-beta.13/angular-route.min.js"></script>
+  <!-- <script type="text/javascript" src="http://cdn.staticfile.org/foundation/5.4.7/js/foundation.min.js"></script> -->
+  <script type="text/javascript" src="angular-ueditor.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+
+ <!--  <script>
+    var editor = new UE.getEditor('test');
+
+    editor.ready(function(){
+      setTimeout(function(){
+        console.log(editor.destroy);
+        editor.destroy();
+        editor = new UE.getEditor('test'); 
+      },500);
+    });
+  </script> -->
+
 </body>
 </html>

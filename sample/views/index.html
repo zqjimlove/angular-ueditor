@@ -1,0 +1,35 @@
+  <div class="row" ng-controller="CTRL">
+    <div class="columns small-12">
+      <h1>angular-ueditor 例子 -- 路由1</h1>
+      <div class="panel">
+        <h2>双向绑定</h2>
+        <div style="margin-bottom:1.25rem" class="ueditor" ng-model="content1" ></div>
+
+        <textarea ng-model="content1"></textarea>
+      </div>
+
+      <div class="panel">
+        <h2>带配置项</h2>
+        <div class="ueditor" ng-model="content2" config="_simpleConfig"></div>
+      </div>
+
+      <div class="panel">
+        <form name="v">
+          <h2>表单非空验证</h2>
+          <div class="ueditor" name="content"  ng-model="content3" config="_simpleConfig" required></div>
+        </form>
+
+        <div style="background:#FFF;color:red">
+          <tt>content = {{content2}}</tt>
+          <br>  
+          <tt>v.content.$valid = {{v.content.$valid}}</tt>
+          <br>  
+          <tt>v.content.$error = {{v.content.$error}}</tt>
+          <br>  
+          <tt>v.$valid = {{v.$valid}}</tt>
+          <br>  
+          <tt>v.$error.required = {{!!v.$error.required}}</tt>
+          <br></div>
+      </div>
+    </div>
+  </div>

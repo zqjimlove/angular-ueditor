@@ -62,6 +62,8 @@ You can customize the UEditor by [UE start config](http://fex-team.github.io/ued
 </script>
 ```
 
+**If Element ID exists then the editor will keep save the status and content ** 
+
 ## Method
 
 #### `ready(listener)`
