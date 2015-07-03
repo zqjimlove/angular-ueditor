@@ -44,7 +44,8 @@ http://inhu.net
                 _UEConfig = $S.config ? $S.config : {};
                 _editorId = attr.id ? attr.id : "_editor" + (Date.now());
                 element[0].id = _editorId;
-                this.editor = new UE.getEditor(_editorId, _UEConfig);
+                this.editor = new UE.ui.Editor(_UEConfig);
+                this.editor.render(_editorId);
                 return this.editor.ready(function() {
                   _self.editorReady = true;
                   _self.editor.addListener("contentChange", function() {
@@ -56,16 +57,15 @@ http://inhu.net
                     }
                     _updateByRender = false;
                   });
-                  if (_self.modelContent.length > 0) {
+                  if (_self.modelContent && _self.modelContent.length > 0) {
                     _self.setEditorContent();
                   }
                   if (typeof $S.ready === "function") {
                     $S.ready(_self.editor);
                   }
                   $S.$on("$destroy", function() {
-                    var _ref;
-                    if ((_ref = _self.editor && _self.editor.destory) != null) {
-                      _ref.destory();
+                    if (!attr.id && UE.delEditor) {
+                      UE.delEditor(_editorId);
                     }
                   });
                 });
